@@ -1,3 +1,3 @@
-### Práctica de Introducción a Javascript
+# Práctica de Introducción a Javascript
 
-*Jose Manuel Perez*
+## Jose Manuel Perez*
