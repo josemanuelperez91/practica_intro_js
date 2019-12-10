@@ -1,3 +1,3 @@
 # Práctica de Introducción a Javascript
 
-## Jose Manuel Perez*
+Author: Jose Manuel Perez
