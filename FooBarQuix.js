@@ -1,33 +1,33 @@
 const argument = process.argv[2];
 
-let divisible_number = Number(argument);
-let digits_array = argument.split('');
-let output_string = "";
+let divisibleNumber = Number(argument);
+let digits = argument.split('');
+let outputString = "";
 
-if (divisible_number % 3 == 0) {
-    output_string += "Foo";
+if (divisibleNumber % 3 == 0) {
+    outputString += "Foo";
 }
-if (divisible_number % 5 == 0) {
-    output_string += "Bar";
+if (divisibleNumber % 5 == 0) {
+    outputString += "Bar";
 }
-if (divisible_number % 7 == 0) {
-    output_string += "Quix";
+if (divisibleNumber % 7 == 0) {
+    outputString += "Quix";
 }
-digits_array.forEach(digit => {
+digits.forEach(digit => {
 
     if (digit === "3") {
-        output_string += "Foo";
+        outputString += "Foo";
     }
     if (digit === "5") {
-        output_string += "Bar";
+        outputString += "Bar";
     }
     if (digit === "7") {
-        output_string += "Quix";
+        outputString += "Quix";
     }
 });
 
-if (output_string) {
-    console.log(output_string);
+if (outputString) {
+    console.log(outputString);
 } else {
-    console.log(divisible_number);
+    console.log(divisibleNumber);
 }
