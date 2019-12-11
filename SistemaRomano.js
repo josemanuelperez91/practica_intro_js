@@ -1,10 +1,8 @@
 const argument = process.argv[2];
 let isNumber = Number(argument);
 
-
 const romanLetters = ["I", "V", "X", "L", "C", "D", "M"];
 const romanValues = [1, 5, 10, 50, 100, 500, 1000];
-
 
 let romanToArabic = (roman) => {
     let romanString = new String(roman).toUpperCase();
@@ -134,7 +132,7 @@ let isRomanNumber = (roman) => {
                         return false;
                 }
                 if (romanString[i - 1] === "I") {
-                    let higherRomanLetters = romanLetters.splice(1);
+                    let higherRomanLetters = romanLetters.slice(1);
                     if (higherRomanLetters.includes(romanString[i + 1])) {
                         return false;
                     }
@@ -147,7 +145,7 @@ let isRomanNumber = (roman) => {
                         return false;
                 }
                 for (let j = i + 1; j < romanStringLength; j++) {
-                    let higherRomanLetters = romanLetters.splice(2);
+                    let higherRomanLetters = romanLetters.slice(2);
                     if (higherRomanLetters.includes(romanString[j])) {
                         return false;
                     }
@@ -161,7 +159,7 @@ let isRomanNumber = (roman) => {
                 }
 
                 if (romanString[i - 1] === "X") {
-                    let higherRomanLetters = romanLetters.splice(3);
+                    let higherRomanLetters = romanLetters.slice(3);
                     if (higherRomanLetters.includes(romanString[i + 1])) {
                         return false;
                     }
@@ -176,7 +174,7 @@ let isRomanNumber = (roman) => {
                         return false;
                 }
                 for (let j = i + 1; j < romanStringLength; j++) {
-                    let higherRomanLetters = romanLetters.splice(4);
+                    let higherRomanLetters = romanLetters.slice(4);
                     if (higherRomanLetters.includes(romanString[j])) {
                         return false;
                     }
@@ -190,7 +188,7 @@ let isRomanNumber = (roman) => {
                 }
 
                 if (romanString[i - 1] === "C") {
-                    let higherRomanLetters = romanLetters.splice(5);
+                    let higherRomanLetters = romanLetters.slice(5);
                     if (higherRomanLetters.includes(romanString[i + 1])) {
                         return false;
                     }
@@ -203,7 +201,7 @@ let isRomanNumber = (roman) => {
                         return false;
                 }
                 for (let j = i + 1; j < romanStringLength; j++) {
-                    let higherRomanLetters = romanLetters.splice(6);
+                    let higherRomanLetters = romanLetters.slice(6);
                     if (higherRomanLetters.includes(romanString[j])) {
                         return false;
                     }
