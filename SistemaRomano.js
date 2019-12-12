@@ -87,7 +87,7 @@ let romanToArabic = (roman) => {
 
 let arabicToRoman = (arabic) => {
     let arabicDigit = Number(arabic);
-    if (arabicDigit > 3999 || arabicDigit < 1) return "Numero no covertible";
+    if (!Number.isInteger(arabicDigit) || arabicDigit > 3999 || arabicDigit < 1) return "Numero no covertible";
     let romanString = "";
 
     for (let i = 6; i >= 0; i--) {
@@ -98,7 +98,7 @@ let arabicToRoman = (arabic) => {
         }
 
         if (i > 0) {
-            if (i % 2 === 0) {
+            if (i % 2 === 0 && i > 0) {
                 let minValueToSub = (romanValues[i] - romanValues[i - 2]);
                 if (arabicDigit >= minValueToSub && arabicDigit < romanValues[i]) {
                     arabicDigit = arabicDigit - minValueToSub;
@@ -124,12 +124,24 @@ let isRomanNumber = (roman) => {
 
     for (let i = romanStringLength - 1; i >= 0; i--) {
 
+        let repeated = 0;
+        let consecutiveChar = true;
+
         switch (romanString[i]) {
             case "I":
-
-                for (let j = i - 3; j >= 0; j--) {
-                    if (romanString[j] === "I")
+                for (let j = i - 1; j >= 0; j--) {
+                    if (romanString[j] === "I") {
+                        if (!consecutiveChar) {
+                            return false;
+                        } else {
+                            repeated++;
+                        }
+                    } else {
+                        consecutiveChar = false;
+                    }
+                    if (repeated > 2) {
                         return false;
+                    }
                 }
                 if (romanString[i - 1] === "I") {
                     let higherRomanLetters = romanLetters.slice(1);
@@ -137,6 +149,7 @@ let isRomanNumber = (roman) => {
                         return false;
                     }
                 }
+
                 break;
             case "V":
 
@@ -150,12 +163,23 @@ let isRomanNumber = (roman) => {
                         return false;
                     }
                 }
+
                 break;
 
             case "X":
-                for (let j = i - 3; j >= 0; j--) {
-                    if (romanString[j] === "X")
+                for (let j = i - 1; j >= 0; j--) {
+                    if (romanString[j] === "X") {
+                        if (!consecutiveChar) {
+                            return false;
+                        } else {
+                            repeated++;
+                        }
+                    } else {
+                        consecutiveChar = false;
+                    }
+                    if (repeated > 2) {
                         return false;
+                    }
                 }
 
                 if (romanString[i - 1] === "X") {
@@ -182,9 +206,19 @@ let isRomanNumber = (roman) => {
                 break;
 
             case "C":
-                for (let j = i - 3; j >= 0; j--) {
-                    if (romanString[j] === "C")
+                for (let j = i - 1; j >= 0; j--) {
+                    if (romanString[j] === "C") {
+                        if (!consecutiveChar) {
+                            return false;
+                        } else {
+                            repeated++;
+                        }
+                    } else {
+                        consecutiveChar = false;
+                    }
+                    if (repeated > 2) {
                         return false;
+                    }
                 }
 
                 if (romanString[i - 1] === "C") {
