@@ -12,12 +12,12 @@ Ex:
 
 - Kata 2 **sistema-romano.js**
 
-`node sistema-romano.js {Num}`
+`node sistema-romano.js {Num}`  
 `node sistema-romano.js {Roman String}`
 
 Ex:
 
-`node sistema-romano.js 779`
+`node sistema-romano.js 779`  
 `node sistema-romano.js MDVI`
 
 - Kata 3 **poker-game.js**
