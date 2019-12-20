@@ -1,39 +1,4 @@
-const arguments = process.argv.splice(2);
-
-class PokerCard {
-
-    constructor(stringCard) {
-        this.cardValue = stringCard.split("")[0];
-        this.cardSuit = stringCard.split("")[1];
-    }
-
-    get suit() {
-        return this.cardSuit;
-    }
-    get value() {
-        return this.cardValue;
-    }
-
-    get numericValue() {
-
-        switch (this.cardValue) {
-
-            case "A":
-                return 14;
-            case "K":
-                return 13;
-            case "Q":
-                return 12;
-            case "J":
-                return 11;
-            case "T":
-                return 10;
-            default:
-                return Number(this.cardValue);
-        }
-    }
-}
-class PokerHand {
+export class PokerHand {
 
     /**
      * 
@@ -42,6 +7,20 @@ class PokerHand {
     constructor(hand) {
         this.hand = hand;
     }
+
+
+    get verifyHand() {
+        if (this.hand.length != 5) {
+            return false;
+        }
+        this.hand.forEach(card => {
+            if (!card.verifyCard()) {
+                return false;
+            }
+        });
+        return true;
+    }
+
     /**
      * @returns the highest value card in the PokerHard
      */
@@ -235,156 +214,49 @@ class PokerHand {
     }
 }
 
-const handPlayerOne = new PokerHand(arguments.slice(0, 5).map(function (card) {
-    return new PokerCard(card);
-}));
-const handPlayerTwo = new PokerHand(arguments.slice(5).map(function (card) {
-    return new PokerCard(card);
-}));
-
-let winMessage = "";
-
-pointsPlayerOne = handPlayerOne.handPoints;
-pointsPlayerTwo = handPlayerTwo.handPoints;
+export class PokerCard {
 
 
-if (pointsPlayerOne.value === pointsPlayerTwo.value) {
-
-    switch (pointsPlayerOne.name) {
-        case "Straight Flush":
-
-            if (handPlayerOne.higherCard.numericValue > handPlayerTwo.higherCard.numericValue) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-            break;
-        case "Four of a Kind":
-
-            if (handPlayerOne.fourOfAKind[0].numericValue > handPlayerTwo.fourOfAKind[0].numericValue) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-            break;
-        case "Full House":
-
-            if (handPlayerOne.threeOfAKind[0][0].numericValue > handPlayerTwo.threeOfAKind[0][0].numericValue) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-            break;
-
-        case "Flush":
-
-            if (handPlayerOne.higherCard.numericValue > handPlayerTwo.higherCard.numericValue) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-            break;
-
-        case "Straight":
-
-            if (handPlayerOne.higherCard.numericValue > handPlayerTwo.higherCard.numericValue) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-            break;
-
-        case "Three of a Kind":
-
-            if (handPlayerOne.threeOfAKind[0].numericValue > handPlayerTwo.threeOfAKind[0].numericValue) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-            break;
-
-        case "Two Pairs":
-
-            const playerOneFirstPair = handPlayerOne.pair;
-            const playerOneSecondPair = handPlayerOne.twoPairs.filter(arrayCard => !playerOneFirstPair.includes(arrayCard));
-
-            const playerTwoFirstPair = handPlayerOne.pair;
-            const playerTwoSecondPair = handPlayerOne.twoPairs.filter(arrayCard => !playerTwoFirstPair.includes(arrayCard));
-
-            if (playerOneFirstPair[0].numericValue === playerTwoFirstPair[0].numericValue) {
-                if (playerOneSecondPair[0].numericValue === playerTwoSecondPair[0].numericValue) {
-
-                    const playerOnefifthCard = handPlayerOne.hand.filter(card =>
-                        !playerOneFirstPair.includes(card) && !playerOneSecondPair.includes(card));
-                    const playerTwofifthCard = handPlayerOne.hand.filter(card =>
-                        !playerTwoFirstPair.includes(card) && !playerTwoSecondPair.includes(card));
-
-                    if (playerOnefifthCard[0].numericValue > playerTwofifthCard[0].numericValue) {
-                        winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-                    } else {
-                        winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-                    }
-                }
-
-            } else {
-                if (playerOneFirstPair[0].numericValue > playerTwoFirstPair[0].numericValue) {
-                    winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-                } else {
-                    winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-                }
-            }
-            break;
-
-        case "Pair":
-
-            if (handPlayerOne.pair[0].numericValue === handPlayerTwo.pair[0].numericValue) {
-
-                if (handPlayerOne.higherCard.numericValue > handPlayerTwo.higherCard.numericValue) {
-                    winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-                } else {
-                    winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-                }
-            } else {
-                if (handPlayerOne.pair[0].numericValue > handPlayerTwo.pair[0].numericValue) {
-                    winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-                } else {
-                    winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-                }
-            }
-
-            break;
-
-        case "High Card":
-
-            playerOneHigherCard = handPlayerOne.higherCard;
-            playerTwoHigherCard = handPlayerTwo.higherCard;
-
-            while (playerOneHigherCard != playerTwoHigherCard && handPlayerOne.hand.length > 0) {
-
-                handPlayerOne.splice(handPlayerOne.indexOf(playerOneHigherCard), 1);
-                playerOneHigherCard = handPlayerOne.higherCard;
-
-                handPlayerTwo.splice(handPlayerTwo.indexOf(playerTwoHigherCard), 1);
-                playerTwoHigherCard = handPlayerTwo.higherCard;
-
-            }
-            if (playerOneHigherCard.numericValue > playerTwoHigherCard) {
-                winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-            } else {
-                winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
-            }
-
-            break;
-
+    constructor(stringCard) {
+        this.cardValue = stringCard.split("")[0];
+        this.cardSuit = stringCard.split("")[1];
     }
 
-} else {
 
-    if (pointsPlayerOne.value > pointsPlayerTwo.value) {
-        winMessage = ("Player One Wins, " + pointsPlayerOne.name);
-    } else {
-        winMessage = ("Player Two Wins, " + pointsPlayerTwo.name);
+    get verifyCard() {
+
+        const validSuits = ["D", "S", "H", "C"];
+        const validValues = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"];
+
+        if (validSuits.includes(this.cardValue) && validValues.includes(this.cardValue)) {
+            return true;
+        }
+        return false;
+    }
+
+    get suit() {
+        return this.cardSuit;
+    }
+    get value() {
+        return this.cardValue;
+    }
+
+    get numericValue() {
+
+        switch (this.cardValue) {
+
+            case "A":
+                return 14;
+            case "K":
+                return 13;
+            case "Q":
+                return 12;
+            case "J":
+                return 11;
+            case "T":
+                return 10;
+            default:
+                return Number(this.cardValue);
+        }
     }
 }
-
-console.log(winMessage ? winMessage : "Empate");
