@@ -15,12 +15,17 @@ class PokerHand {
         this.hand = hand;
     }
 
-    static verifyPlay(pokerPlay) {
+    /**
+    * @returns true if the array of inputs has no duplicates
+    */
+    static verifyPlay(pokerPlayArray) {
 
-        const setPlay = [...new Set(pokerPlay)];
-        return (setPlay.length === pokerPlay.length)
+        const setPlay = [...new Set(pokerPlayArray)];
+        return (setPlay.length === pokerPlayArray.length)
     }
-
+    /**
+       * @returns true if the hand contains 5 verified cards, false otherwise.
+       */
     get verifyHand() {
         if (this.hand.length != 5) {
             return false;
@@ -204,6 +209,9 @@ class PokerHand {
         }
     }
 
+    /**
+     * @returns an object with the name and numeric value of the highest value hand.
+     */
     get handPoints() {
 
         if (this.straightFlush)
@@ -238,6 +246,9 @@ class PokerCard {
     }
 
 
+    /**
+     * @returns true if the card has a valid format, false otherwise
+     */
     get verifyCard() {
 
         const validSuits = ["D", "S", "H", "C"];
@@ -285,6 +296,8 @@ const handPlayerTwo = new PokerHand(myArguments.slice(5).map(function (card) {
     return new PokerCard(card);
 }));
 
+/// Verifying players hand ////
+
 if (handPlayerOne.verifyHand && handPlayerTwo.verifyHand && PokerHand.verifyPlay(myArguments)) {
 
     let winMessage = "";
@@ -292,15 +305,14 @@ if (handPlayerOne.verifyHand && handPlayerTwo.verifyHand && PokerHand.verifyPlay
     pointsPlayerOne = handPlayerOne.handPoints;
     pointsPlayerTwo = handPlayerTwo.handPoints;
 
-
-
-    ///In case of Tie////
+    /// In case of tie ////
 
     if (pointsPlayerOne.value === pointsPlayerTwo.value) {
         console.log("Both players have " + pointsPlayerOne.name);
 
         console.log("Resolving Tie... ");
 
+        // Resolving tie differently for each case //
         switch (pointsPlayerOne.name) {
             case "Straight Flush":
 
@@ -443,6 +455,3 @@ if (handPlayerOne.verifyHand && handPlayerTwo.verifyHand && PokerHand.verifyPlay
 } else {
     console.log("Invalid Poker hand input");
 }
-
-
-
