@@ -6,9 +6,9 @@
 
     `node foo-bar-quix.js {Num}`
 
-Ex:
+    Ex:
 
-   `node foo-bar-quix.js 10`
+    `node foo-bar-quix.js 10`
 
 - Kata 2 **sistema-romano.js**
 
@@ -16,7 +16,7 @@ Ex:
 
     `node sistema-romano.js {Roman String}`
 
- Ex:
+    Ex:
 
     `node sistema-romano.js 779`
  
