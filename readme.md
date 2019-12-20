@@ -28,6 +28,6 @@
 
    Ex:
 
-   `node poker-game.js 5D 3H AD 6C QD QS KS 4H 9C TH`  
+   `node poker-game.js 5D 3H AD 6C QD KS KA 4H 9C TH`  
 
 **Author:** Jose Manuel Perez
