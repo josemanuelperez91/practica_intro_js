@@ -24,10 +24,10 @@ Ex:
 
 - Kata 3 **poker-game.js**
 
-  `node poker-game.js {5* Poker Cards for Player 1} {5* Poker Cards for Player 2}`
+`node poker-game.js {5* Poker Cards for Player 1} {5* Poker Cards for Player 2}`
 
-  Ex:
+ Ex:
 
-  `node poker-game.js 5D 3H AD 6C QD QS KS 4H 9C TH`  
+ `node poker-game.js 5D 3H AD 6C QD QS KS 4H 9C TH`  
 
 Author: Jose Manuel Perez
